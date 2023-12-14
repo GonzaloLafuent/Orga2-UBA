@@ -1,0 +1,47 @@
+Ejercicio 1-
+A- 32 bits, 
+B- 8
+C- 8 registros de proposito general.
+D- tiene 32 bits y apunta a la instruccion que se va a ejecutar. 
+E- tiene que poder apuntar a cualquier direccion de memoria (2^32 posiciones)
+
+Ejercicio 2-
+A- 32 bits. Guarda el status del programa que se esta ejecutando y permite un control limitado del procesador (?). Cada bit de los 32 representa un flag.
+B- Overflow: bit 11, sign: bit 7, if: bit 9
+C- No, lo extiende a 64 flags, los primeros 32 son para arquitectura de 64 y los ultimos 32 son los mismos que EFLAGS. 
+
+Ejercicio 3-
+A- Es para soportar procedimientos o llamados as subrutinas y el pasaje de parametros entre procedimientos y/o subrutinas. 
+B- Está ubicada en la memoria.
+
+A1- ESP apunta a la direccion donde esta la pila, a la primer posicion. EBP apunta al tope de la pila
+
+C1- Se pshuea el EIP con el fin de no perder la proxima instruccion a ejecutar  all llamar a una funcion
+D1- resume la ejecucion y retorna el valor de eip
+E1- El programador debe asegurarse de que el stack pointer esté apuntando al return instruction pointer en el stack antes de ejecutar la operacion RET
+f1- el ancho de la pila es de 32 bits si es de 32 bits y de 64 bits si es de 64.
+g1- 
+
+2-
+Ejercicio 4-
+A- 
+DEC: recibe un operando, puede ser memoria-memoria, registro-registro. 
+ADD:  Recibe 2 operandos, , registro-registro, registro-inmediato, memoria-inmediato, registro-memoria, memoria -registro. 8,16,32,64 bits.
+MOV: Recibe 2 operandos, registro-registro, registro-inmediato, memoria-inmediato, registro-memoria, memoria -registro. 
+JZ: un operando, una direccion de memoria, 8,16,32 bits. 
+B-
+DEC: Decrementa en 1 al registro/memoria que se indique
+ADD: Suma los operandos y guarda el valor en el primero
+MOV: Guarda el segundo operando en el primero
+JZ: Si ZF = 1, salta a la posicion de memoria especificada
+C-
+DEC EAX
+DEC EBX
+
+ADD R8,0X0001
+MOV R5,0X0002
+JZ 0X01A2
+
+iGNACIO
+
+https://www.felixcloutier.com/x86/
