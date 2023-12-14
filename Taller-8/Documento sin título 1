@@ -1,0 +1,28 @@
+1) para incorporar tarea debemos definir un scheduler, que nos permitira alternar entre estas dos atreas definidas, estebleciendo un intervalo de tiempo para cada una. debemos definir una diretorio de paginas y tablas para las mismas, donde cada una tendra su correspondiente cr3. la cantidad que usemos dependera del tamaño del codigo de las mismas, como tambien la cantidad de datos que usemos.
+cada tarea a su ves tendra asociada una tss en memoria que nos permitira guardar el contexto de la trea ejecutada, para no perderlo cuando se produzca un cambio. ademas para poder accder a la tss debemos deifinir por tarea un registros de tarea, que establece un selector para la gdt que nos permite obtener el tss.
+
+2) teniendo en cuenta que el contexto se define como los valores de registros en un momemnto dado, el cambio de contexto se poduce cuando se realiza un cambio de tarea, donde se guarda el conexto actual de una tarea que estaba en ejecucion y se trae el conexto de la tarea que se va eejcutar. de esta forma el cambio de conexto implicada una modificacion en los valores de los registros. el tr contiene la direccion hacia donde se encuntra la tss, tendra una parte libre que esta vinculada a la selector de segemnto dentro de la gdt y otra invisible. cada tarea tendra su tr, el cual sera guardado en la tss frente a un cambio. cuando se porduzca un cambio de tarea a partir del tr podemos lozalizar el descriptor de tss dentro de la gdt y con eso recuperar el contexto de la trea a ajecutar
+
+3)
+
+4) lleva el ritmo de como se van ejecutando las tareas dentro del sistema, el scheduler define un intervlao de tiempo para cada tarea, cuando este termina se produce el cambio de tarea. en si es el mecanismo que marca el cambio de tareas. cuando hablamosm de politica nos referimos a que normativa establecemos para producir esta distribucion de tiempo en el inercambio de tareas 
+
+5) a partir de la conmutacion de tareas a gran velocidad, al ir cambiando de atrea rapidamne te se genera la nocion de simultenidad
+--------------------------------------------------------------------------------------------------------------------------------------------
+6)
+a) genera la entrada en la idt para un descriptor de tss apartir de la direccion de la tss
+
+7)
+a)por cada tic de reloj se produce la conmutacion de tareas, se le pide al scheduler la proxima tarea a ejcutar, en el caso de ser distinta a la que se esta ejecutando se salta a ella sino se sale de la interrupcion sin cambiar de tarea
+
+b)el tamaño es de 16 bits dado que corresponde a un selector de segmento. indican a donde debemos salatr para ejecutar la tarea dada. el offset no tiene determinacion tal que el selector determina a que lugar de la memoria salteremos
+
+c)a la instruccion que estaba por ejecutar antes de ser interrumpida por el cambio de tarea, si es la primera vez que se ejecuta entonces el epi arranca donde comienza el codigo
+
+d)tenemos una lista de tareas las cuales se van habilitando y deshabilitando de acuerdo a la politica. se busca la proxima tarea desde el indice de la catual, si esta disponible la ejecutamos, si es eejcutable lo que hacemos es devolver su slector para poder hacer el jmp far si no hay tarea para ejecutra saltamos a la tarea idle
+
+14)
+a) genera la entrada de en la gdt para la tss de la tarea creada. 
+
+b)se hace el <<3 para obtener un slector de segmento valido a partir de indice establcido para la entrada de la gdt tal que sched_add_task recibe un selector
+15)

@@ -1,0 +1,57 @@
+1)
+Modo real: Es el modo en que arranca todos los x86, despues de encederlo o resetearlo.
+- No tiene nivel de privilegio, esta siempre en 0.
+- Trabaja por defecto en 16 bits. limita la cantidad de memoria que podes acceder
+- Memoria disponible: 1 MB. 
+- Privilegios: No tiene 
+- Interrupciones: Rutinas de atencion. 
+- Set de instrucciones: Todas
+
+Modo protegido: Este modo es el estado nativo del procesador. Provee un set de muchas ventajas, flexibilidad, alto rendimiento y compatibilidad con software existente.
+- Memoria disponible: 4GB. aca pasas a 32 bits por eso la cantidad e memoria disponible cambia
+- Privilegios: 4 niveles de porteccion (0,1,2,3)
+- Interrupciones: Rutinas de atencion con privilegios
+- Set de instrucciones: Depende el nivel de privilegio.
+
+2)
+Las desventajas serian la limtiacion de la memoria, los privilegios y los modos de direccionamiento, tambien tenemos control total de la memoria(cosa que seria peligrosa). 
+
+3) gdt es la tabla definida como una estrctura de datos dentro de la memoria que contiene los distintos descriptores de segementos. cada descriptor de segmento posee los siguientes campos:
+-limite: especifica el tamaño del sgemento, en si cuanto es lo que se puede referenciar dentro del sgemento
+-base: determina donde comienza el segmento, e decir donde se localiza el byte 0, a partir de ahi cada posicion del segmento
+se refrencia sumandole el offset a la base
+-s: determina si es de sistema o no(de aplicacion)
+-p:si el segemento esta en la memoria o no
+-g: establece la forma en la que se pueden refrenciar las unidades dentro del sgemento, si esta en cero ser referencia de byte, sino
+de a unidad de 4kb
+-tipo: determina el tipo del segmento, el cual depende prinipalemnte de si es de sistema o o, a partir de ahi se diferencias distintos tipos
+-dpl: especifica el nivel de privilgeio del sgemento, siendo 0 el de mayor, el que lo accede debe tener ese privilegio
+
+4)
+para ejecucion y lectura tendria que ser
+8:0
+9:1
+10:0
+11:1 
+
+6)
+extern gdt[] contiene la tabla completa de descriptores de segmentos y gdt_desc esteblece el selectpr de segmento de la gdt
+
+10) lgdt nos permite cargar la direccion de donde comienza la gdt en el registro gdtr, con el fin de poder acceder a la gdt mas rapido. en el codigo se inializo en gdt.c
+
+13) si debido que para indicar que estamos en modo portegio hay que setear el bit de pe en 1 dentro del regsitro cr0
+
+////////////////////////////////////////////////////////////
+
+21) screen_drwa_box mos permite establecer en la diemnsion de pantalla que le establecemos un determinado atributo y caracter para cada pixel, estableciendo desde donde arranca y terminar hasta la cantidad de filas y columnas
+utiliza la estructura ca_s que ocupa 2 bytes, donde se guarda el valor del atributo y el del caracter
+
+23) 
+1- Completar la GDT.
+2- Deshabilitar interrupciones (CLI).
+3- Cargar el registro GDTR con la direccion base de la GDT.
+4- Setear el bit PE en 1 del registro CR0.
+5- far jump a la siguiente instruccion.
+6- Cargar los registros de segmento(DS,ES,GS,FS y SS).
+
+

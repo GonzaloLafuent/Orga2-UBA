@@ -1,0 +1,26 @@
+1)
+a- La convencion de llamadas se refiere a dado cierto tipo de dato, que registros vamos a utilizar para representarlos esto se tiene que respetar ya que por ejemplo para leer un dato hay que usar el registro RAX.
+En la ABI 64 bits, se divide en: - No volatiles: RBX,RBP,R12 ... 
+			  	  - Valor de retorno: RAX(entero/puntero) XMM0(flotantes)
+			  	  - Entero,puntero
+			          - Flotantes 
+En la ABI 32 bits, se divide: -No volatiles (EBX,EBP,etc.)
+				- Valor de retorno(EAX)
+				- Parametro: PUSH a la pila (der a izq)
+				- Inv.de pila: PUSH/SUB
+b- El responsable en C, es el compilador. En ASM el responsable es el programador( o ABI???).
+c- El stack frame es la region de la pila comprendidad entre los parametros recibidos y el tope de la pila actual. Es decir, representa los datos de la funcion llamada.(chequear??).
+Prologo: es donde se reserva espacio en la pila para datos temporales, se agrega padding para mantenerla alineada a 16 bytes y se preserva los valores de los registros no volatiles. 
+Epilogo: es donde restauramos los valores de los registros no volatiles y devolvemos la pila a su estado inicial. 
+
+d- El mecanismo es primero actualizar la base de la pila, y luego desplazar el tope de la pila 64 bytes para reservar espacion dentro de la pila. 
+
+e- Es necesario alinear a algun multiplo 16 bytes, como al entrar en una funcion esta alineado a 16 bytes al hacer la instruccion CALL como hace un push se desealinea, luego es responsabilidad del programador alinearlo a un multiplo de 16 bytes.
+
+f- 1- 
+Se ordenan por orden de declaracion y como el miembro mas grande es de 8 y todos son de 8, no va a haber padding
+|1byte-r|1byte-g|1byte-b|1byte-a|
+|1byte-a|1byte-r|1byte-g|1byte-b|
+Va a afectar a la función solo en la medida de acceso a los miembros de la estructura.
+2- siendo que los punteros son enteros a nivel asm, el argumento array y tamano, comparten tipo, por lo que si se cambia el orden, se intercambiaran en cuanto a que registro contiene cada dato
+3- Como ahora el parametro de la estructura esta alineadda a 32ytes  

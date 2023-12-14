@@ -1,0 +1,39 @@
+1)
+a- 2 niveles: usuario y supervisor
+b- A partir de una direccion lineal y la dividio en 3, el directory_index, page_index y el offset. A partir de directory_index junto con el cr3 llego al page directory entry. 
+Luego a partir de page_index indexo (page_directory_entry + page_index * 4) en la page_table.
+Esta direccion que indexe la uso como base para la pagina que necesito. Ahora a partir del offset busco en la pagina lo que necesito.
+
+c- d: Indica cuando modifico una pagina.
+   a: Indica cuando se escribe o lee en la pagina.
+   pcd: Hace que la pagina no se almacene en memoria rapida. Habilita o no el cache.
+   pwt: Hace que al escribir se refleje en cache y en memoria a la vez. Forma en que se cacheaba la memoria. 
+   u/s: Indica si la pagina puede er accedida por usuario o supervisor
+   r/w: indica si la pagina puede leerse y escribirse o solo leerse.
+   p: bit de presente si esta en la memoria
+ 
+ d-  // PREGUNTAR
+ Cuando wp del cr0 esta en 0 y no difieren en read/write, entonces va a depender del wp
+
+ 
+ e- // PREGUNTAR
+ 5 minimos porque hay una page directory, page table, y las 3 paginas(directorio, tabla de paginas , y la memoria). o 9 ya que en cada paso pido page_directory, page_table y la pagina que necesito. 
+ 
+g- TLB: Cache de traducciones, se guarda las ultimas traducciones. 
+Hay que purgarlo por que cuando realicemos un cambio en nuestras estructuras de paginacion es necesario forzar una limpieza del mismo para evitar que las direcciones 
+pre-computadas que ya no son validas se sigan empleando. Es decir, para no tener entradas a paginas que hallan sido cambiadas.
+Los atributos que tienen son: bits de control, direccion fisica base, tabla, directorio. 
+No se ve afectada, porque es como modificar una memoria cache, entonce no cambia la pagina.
+
+2)
+a- 
+
+3) 
+b- Mapear las paginas es necesario para poder acceder a la direccion virtual y poder luego copiar.
+Desmapear para eliminar las paginas.(?) 
+SRC_VIRT_PAGE es la direccion virtual de la pagina que queremos copiar.
+DST_VIRT_PAGE es la direccion virtual de la pagina a donde vamos a copiar.
+CR3 es para saber la paginacion del proceso actual.
+
+ 
+ 
